@@ -1,0 +1,100 @@
+1- INTRODUCCIÓN A LAS EXTENSIONES REACTIVAS Y A LA PROGRAMACIÓN REACTIVA
+
+  ¿Porqué usar extensiones reactivas?
+    - Porque todos quieren información en tiempo real.
+
+  ¿Cuando usar extensiones reactivas?
+    * Para manejar cualquier evento en la interfaz del usuario.
+    * Cuando es necesario notificar sobre cambios en un objeto(s)
+    * Cuando se utiliza comunicación por sockets.
+    * Cuando necesitamos trabajar con flujos de información (Streams)
+
+    Piezas fundamentales de la programación reactiva.
+      * Observables
+        - Son la fuente de la información
+        - Pueden emitir multiples valores, sólo uno o ninguno.
+        - Pueden emitir errores.
+        - Pueden ser infinitos, finitos. (Se pueden completar si son infinitos)
+        - Pueden ser síncronos o asíncronos.
+      * Subscriber
+        - Se suscriben a un observable, es decir, estar pendiente de lo que realiza el observable.
+        - Consumen / Observan la data del observable.
+        - Pueden recibir los errores y eventos de observable.
+        - Desconocen todo lo que se encuentra detrás del observable.
+      * Operadores
+        - Usados para transformar observables (map, group, scan...)
+        - Usados para filtrar observables (filter, distinct, skip, debounce...)
+        - Usados para combinar observables .
+        - Usados para crear nuevos observables.
+        
+     Beneficios de la programación reactiva
+      * Evitar el "Callback Hell".
+      * Trabajar de forma simple tareas sincrónas y asíncronas.
+      * Uso de Operadores para reducir y simplificar el trabajo
+      * Es facil transformar los flujos (streams) de información.
+      * Facil de implementar.
+      * Fácil anexar procedimientos sin alterar el producto.
+
+    ¿Qués es Reactive X y como funciona?
+      * Reactive X es una API para programación asíncrona usando observables, se autoproclaman diciendo que son la combinación del patrón observer, del patrón iterador y de la programación funcional implementado de manera correcta.
+
+    El patrón observer  
+      * Es un patrón de diseño de software que define una dependencia del tipo uno a muchos entre objetos, de manera que cuando uno de los objetos cambia su estado, notifica este cambio a todos los dependientes. (Un ejemplo puede ser una avenida con semaforos).
+      * Notifica cuando sucede cambios.
+
+    El patrón iterador.
+      * El POO, el patrón iterador define una interfaz que declara los métodos necesarios para acceder secuencialmente a un grupo de objetos de una colección.
+      * Poder ejecutar operaciones secuenciales.
+
+      * Es básicamente, crear un conjunto de funciones que tengan un objetivo específico. Es decir, si tengo una función que reciba "A" y retorna "A + 1", siempre que yo llame esa función, retornará "A + 1". Sin efectos secundario, sin mutar la data.
+      * Tener funciones con tareas específicas que reciban argumentos y no muten la información.
+
+
+2- OBSERVABLES.
+    Es necesario desusbcribirse de los observables que ya estan subscritos para evitar fugas de memoria, pero tambien si en un observer está utilizando el setInterval requieres limpiar el interval o finalizar el envio de información con el método complete(), Pueder ver el ejemplo en 01-observable/02-unsubscribe-add.ts
+
+
+    Un subject es un tipo especial de observable y tiene un par de caracteristicas importantes:
+      * Casteo Múltiple
+      * También es un observer
+      * También se puede manejar el next, error y complete.
+
+      El subject ayuda a que la información de todos todos los subscriptions sea la misma, Puede ver el ejemplo en 01-observable/03-subjects.ts
+
+      * Cuando la data es producida por el observable en si mismo, es considerado un "cold observable". PEro cuando la data es producida FUERA del observable es lladamo "Hot observable".
+
+
+3- FUNCIONES PARA CREAR OBSERVABLES.
+
+  Función of
+    * Crea observables en base a un listado de elementos.
+    * Emite los valores en secuencia de manera sincrona y cuando emita el último valor del observable, este finaliza.
+
+  Función fromEvent
+    * Nos permite crear observables en base a un eventTarget(que provengan del Document Object Model).
+    * No hay un fin del observable pero si lo podemos completar.
+    * Es el operador para crear observables más usado.
+
+  Función range
+    * Crea un observable que emite una secuencia de números en base a un rango
+    * Por defectos son síncronos pero se pueden convertir en asíncronos utilizando un AsyncScheduler:
+      * Este es un ejemplo (vé el código en 01-observables/06-range.ts): 
+        asi range(-5, 10, asyncScheduler)
+
+    Función timer e interval 
+      * Ambos crean observables que trabajan con intervalos de tiempo
+      * Son observables asíncronos por naturaleza
+      * La función interval funciona como un setInterval nativo de JavaScript pero un poco diferente
+      * La función timer funciona como un setTimeOut nativo de JavaScript pero también puede convertirse en un interval
+      * Puedes ver el ejemplo de ambos en el archivo 01-observables/07-interval-and-timer.ts
+
+    Los AsyncScheduler
+      * No crea un observable, sino una subscripción.
+      * Ver el ejemplo en 01-observables/08-asyncScheduler.ts
+
+    Función from 
+      * Toma cualquier cosa y la convierte a un obvservable
+
+      * Ver el ejemplo de 01-observables/09-from.ts
+
+
