@@ -98,3 +98,34 @@
       * Ver el ejemplo de 01-observables/09-from.ts
 
 
+4- OPERADORES BÁSICOS
+
+  Operador map
+    * Transforma lo que recibimos del observable en algo que nostros ocupemos ya sea para extraer información del observable o transformarla en algo diferente
+
+  Operador pluck
+    * Sirve para extraer un valor del observable que estamos recibiendo y que ese sea la nueva salida de dicho observable
+    * Ver el ejemplo de 02-operadores-basicos/02-pluck.ts
+
+  
+  Operador mapTo (Esto esta deprecada desde la versión 9, se debe cambiar por el operador map)
+    * Permite transformar la entrada a una salida específica (puede se lo que sea)
+    * Ver el ejemplo de 02-operadores-basicos/03-mapTo.ts
+
+  Operado filter
+    * Nos sirve para filtrar las emisiones de los valores que emite el observable 
+    * Ver el ejemplo 02-operadores-basicos/04-filter.ts
+
+  Operador tap
+    * Es utilizado para revisar como fluye la información a través de nuestro observables
+    * El return dentro del tap es ignorado y no afecta al resultado, lo que significa que solo sirve para verificar como viene la información por el observable (depuración).
+
+
+  Operador reduce
+    * Hace lo misque que hace el reduce() en JavaScript
+    * Aplica una función acumuladora a la s emisiones producidas de nuestro observable
+    * No se tendrá ninguna emisión hasta que el observable se complete
+
+  Operador scan
+    * Es casi exactamente lo mismo que el operador reduce, pero la diferencia de este es que cuando los valores emitidos por nuestro observable, inmediantamente van saliendo el resultado del acumulador conforme van ingresando.
+    * El operador scan es la base para el patrón REDUX ya que maneja el estado global de la aplicación en un único objeto
