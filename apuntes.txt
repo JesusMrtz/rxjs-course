@@ -119,13 +119,57 @@
   Operador tap
     * Es utilizado para revisar como fluye la información a través de nuestro observables
     * El return dentro del tap es ignorado y no afecta al resultado, lo que significa que solo sirve para verificar como viene la información por el observable (depuración).
+    ** Ver el ejemplo de 02-operadores-basicos/05-tap.ts
 
 
   Operador reduce
     * Hace lo misque que hace el reduce() en JavaScript
     * Aplica una función acumuladora a la s emisiones producidas de nuestro observable
     * No se tendrá ninguna emisión hasta que el observable se complete
+    * Ver el ejemplo de 02-operadores-basicos/007-reduce.ts
 
   Operador scan
     * Es casi exactamente lo mismo que el operador reduce, pero la diferencia de este es que cuando los valores emitidos por nuestro observable, inmediantamente van saliendo el resultado del acumulador conforme van ingresando.
-    * El operador scan es la base para el patrón REDUX ya que maneja el estado global de la aplicación en un único objeto
+    * El operador scan es la base para el patrón REDUX ya que maneja el estado global de la aplicación en un único objeto.
+    * Ver el ejemplo de 02-operadores-basicos/08-scan.ts
+
+
+5- OPERADORES NO TAN COMUNES
+
+  Operador take
+    * Siver para limitar la cantidad de emisiones que se quiere recibir
+    * Cuando llega al limite, el observable se completa y las emisiones restantes no llegarán a la subscripción 
+    * Si el limete es mayor que las emisiones, este finalizará la subscripción cuando termine por recorrer todas las emisiones del observable
+    * Ve el ejemplo de 03-operadores-no-tan-comunes/01-take.ts
+
+  Operador first
+    * Obtiene el primer valor que cumpla la condición y terminará con el observable
+    * Si no se le pasa una condición, obtendrá la primera emisión del observable y terminará dicho observable
+    * Ve el ejemplo de 03-operadores-no-tan-comunes/02-first.ts
+
+  Operador takeWhile
+    * Permite recibir valores mientras la condición se cumpla
+    * Cuando la condición deja de cumplirse se completa el observable y la emisión que la terminó al menos de que se envie un booleano de que se necesita por ejemplo:
+      * takeWhile(({ y }) => y <= 150, true)
+      * Ve el ejemplo de 03-operadores-no-tan-comunes/03-takeWhile.ts
+
+    Operador takeUntil
+      * Recibe como parametro otro observable
+      * Sigue recibiendo y emitiendo valores del primer observable hasta que el segundo observable emita su primer valor y este lo completará
+       * Ve el ejemplo de 03-operadores-no-tan-comunes/04-takeUntil.ts
+
+    Operador skip
+      * Sirve para saltar u omitir "X" cantidad de emisiones iniciales
+      * Ve el ejemplo de 03-operadores-no-tan-comunes/05-skip.ts
+
+    Operador dictinct
+    * Pasa las emisiones cuyos valores no han sido previamente emitidos.
+    * Ve el ejemplo de 03-operadores-no-tan-comunes/06-distinct.ts
+
+    Operador disctinctUntilChanged
+      * Emite valores siempre y cuando la emisión no sea la misma que la anterior.
+      * Ve el ejemplo de 03-operadores-no-tan-comunes/07-distinctUntilChanged.ts
+
+    Operador distinctUntilKeyChanged
+      * Hace lo misto que el distinctUntilChanged, solamente que solo sirve para emisiones de tipo objeto
+      * Ve el ejemplo de 03-operadores-no-tan-comunes/08-distinctUntilKeyChanged.ts
