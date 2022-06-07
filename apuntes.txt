@@ -173,3 +173,27 @@
     Operador distinctUntilKeyChanged
       * Hace lo misto que el distinctUntilChanged, solamente que solo sirve para emisiones de tipo objeto
       * Ve el ejemplo de 03-operadores-no-tan-comunes/08-distinctUntilKeyChanged.ts
+
+
+6- OPERADORES QUE TRABAJAN CON TIEMPO
+
+  Operador debounceTime
+    * Nos ayuda a que nosotros podamos contar cuantas milesimas de segundo han pasado desde la última emision y si esa milesima de segundo sobrepasa el tiempo estipulado en el parametro, entonces emitirá dicho valor.
+    * Ver el ejemplo en 04-operadores-tiempo/01-debounceTime.ts
+
+  Operador throttleTime
+    *Es muy parecido al debounceTime pero la diferencia es que ignora las emisiones que pasen en el lapso correspondiente.
+    * Ver el ejemplo en 04-operadores-tiempo/02-throttleTime.ts
+
+  Operador sampleTime
+    * Nos permite obtener el último valor emitido en un intervalo de tiempo
+    * Nos permite tener una subscripción que esta pendiente de cada una de sus emisiones en periodos de tiempo.
+     * Ver el ejemplo en 04-operadores-tiempo/03-sampleTime.ts
+
+  Operador sample
+    * Emite el ultimo valor emitido por el observable hasta que el otro observable que tenemos dentro del operador sample() emita un valor.
+    * Ver el ejemplo en 04-operadores-tiempo/04-sample.ts
+
+  Operador auditTime
+    * Emite el ultimo valor que ha sido emitido por el observable en un periodo de tiempo determinado.
+     * Ver el ejemplo en 04-operadores-tiempo/05-auditTime.ts
