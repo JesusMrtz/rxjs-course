@@ -34,6 +34,10 @@ function requestPetitionHTTP(userPassword) {
 }
 
 /** Observables */
+
+/***
+ * Aqui hicimos una pequeña prueba para ver las diferencias entre los operadores de aplanamiento, solo comente y descomente que operador desea ver en acción 'mergeMap', 'switchMap' 'exhaustMap'
+ */
 const submitForm$ = fromEvent<SubmitEvent>(form, 'submit').pipe(
   tap((event) => event.preventDefault()),
   map( (event) => ({

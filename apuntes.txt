@@ -197,3 +197,42 @@
   Operador auditTime
     * Emite el ultimo valor que ha sido emitido por el observable en un periodo de tiempo determinado.
      * Ver el ejemplo en 04-operadores-tiempo/05-auditTime.ts
+
+
+7- PETICIONES AJAX
+
+  Operador ajax
+    * Sirve para realizar peticiones HTTP y convertirlo en observables
+  Operador catchError 
+    * sirve para tapar cualquier error que sucede en el observable
+    * Ve el ejemplo de 05-ajax/01-ajax.ts
+
+  Método getJSON
+    * Sirve par enviar headers al momento de consumir un endpoint
+    * Ve el ejemplo de 05-ajax/02-getJSON.ts
+
+
+8- OPERADORES DE TRANSFORMACIÓN
+
+  Operador mergeAll
+    * Sirve para trabajar con observables que internamente retorna observables y los aplanan en una sola salida
+    * Fusionara todos los observables sin recibir parámetros y vas a obtener los datos propagados combinados.
+    * Hasta que todos los observables se completa, este deja de trabajar
+    * Ver el ejemplo en 06-operadores-transformacion/01-mergeAll.ts
+
+  Operador mergeMap
+    * Trabaja con observables, dentro de otro.. pero la salida no es un observable nuevo, si no el producto de suscripción de este
+    * Crea suscripciones activas cada vez que la suscripción padre emita nuevos valores (es imposible completar las suscripciones abiertas)
+    * Recibe como parámetro cada valor que emite el observable de origen y crea un nuevo observable interno, luego como resultado final o de salida aplana todos esos observables internos para combinar o fusionar los datos. En palabras menos técnicas, primero mapea y luego aplana.
+    * Ver el ejemplo en 06-operadores-tranformacion/02-mergeMap.ts
+
+  Operador switchMap 
+    * Operador que recibe un callback que retorna un observable y ese nuevo observable es el que se va a suscribir para hacer la emisión en la salida
+    * Solo contiene una suscripción interna activa (cancela las anteriores)
+
+  Operador concatMap 
+    * Sirve para concatenar los observables resultantes que puede influir a través de ese operador
+
+  Operador exhaustMap
+    * Mantiene una subscripción activa antes de añadir otra subscripción para que emita los valores.
+    * Si iniciamos un observable, y despues de poco tiempo volvemos a iniciar otro.. El segundo no se ejecuta jamas ya que no ha finalizado el primero.
