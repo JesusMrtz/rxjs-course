@@ -1,4 +1,4 @@
-1- INTRODUCCIÓN A LAS EXTENSIONES REACTIVAS Y A LA PROGRAMACIÓN REACTIVA
+INTRODUCCIÓN A LAS EXTENSIONES REACTIVAS Y A LA PROGRAMACIÓN REACTIVA
 
   ¿Porqué usar extensiones reactivas?
     - Porque todos quieren información en tiempo real.
@@ -50,7 +50,7 @@
       * Tener funciones con tareas específicas que reciban argumentos y no muten la información.
 
 
-2- OBSERVABLES.
+1- OBSERVABLES.
     Es necesario desusbcribirse de los observables que ya estan subscritos para evitar fugas de memoria, pero tambien si en un observer está utilizando el setInterval requieres limpiar el interval o finalizar el envio de información con el método complete(), Pueder ver el ejemplo en 01-observable/02-unsubscribe-add.ts
 
 
@@ -64,7 +64,7 @@
       * Cuando la data es producida por el observable en si mismo, es considerado un "cold observable". PEro cuando la data es producida FUERA del observable es lladamo "Hot observable".
 
 
-3- FUNCIONES PARA CREAR OBSERVABLES.
+2- FUNCIONES PARA CREAR OBSERVABLES.
 
   Función of
     * Crea observables en base a un listado de elementos.
@@ -98,7 +98,7 @@
       * Ver el ejemplo de 01-observables/09-from.ts
 
 
-4- OPERADORES BÁSICOS
+3- OPERADORES BÁSICOS
 
   Operador map
     * Transforma lo que recibimos del observable en algo que nostros ocupemos ya sea para extraer información del observable o transformarla en algo diferente
@@ -134,7 +134,7 @@
     * Ver el ejemplo de 02-operadores-basicos/08-scan.ts
 
 
-5- OPERADORES NO TAN COMUNES
+4- OPERADORES NO TAN COMUNES
 
   Operador take
     * Siver para limitar la cantidad de emisiones que se quiere recibir
@@ -175,7 +175,7 @@
       * Ve el ejemplo de 03-operadores-no-tan-comunes/08-distinctUntilKeyChanged.ts
 
 
-6- OPERADORES QUE TRABAJAN CON TIEMPO
+5- OPERADORES QUE TRABAJAN CON TIEMPO
 
   Operador debounceTime
     * Nos ayuda a que nosotros podamos contar cuantas milesimas de segundo han pasado desde la última emision y si esa milesima de segundo sobrepasa el tiempo estipulado en el parametro, entonces emitirá dicho valor.
@@ -199,7 +199,7 @@
      * Ver el ejemplo en 04-operadores-tiempo/05-auditTime.ts
 
 
-7- PETICIONES AJAX
+6- PETICIONES AJAX
 
   Operador ajax
     * Sirve para realizar peticiones HTTP y convertirlo en observables
@@ -212,7 +212,7 @@
     * Ve el ejemplo de 05-ajax/02-getJSON.ts
 
 
-8- OPERADORES DE TRANSFORMACIÓN
+7- OPERADORES DE TRANSFORMACIÓN
 
   Operador mergeAll
     * Sirve para trabajar con observables que internamente retorna observables y los aplanan en una sola salida
@@ -236,3 +236,30 @@
   Operador exhaustMap
     * Mantiene una subscripción activa antes de añadir otra subscripción para que emita los valores.
     * Si iniciamos un observable, y despues de poco tiempo volvemos a iniciar otro.. El segundo no se ejecuta jamas ya que no ha finalizado el primero.
+
+
+9- OPERADORES Y MÉTODOS DE COMBINACIÓN DE OBSERVABLES
+
+  Función startWith
+    * Nos permite hacer una emisión antes de que el observable empiece a emitir aunque sea un valor sincrono
+
+  Función endWith
+    * Antes de que se complete el obsevable nos permita hacer una emisión al final y mostrarlo en el subscribe
+
+
+  Función concat 
+    * Función que recibe observables, iterables o arreglos como argumentos, para crear un nuevo observable veriamos el resultado.
+
+  Función merge 
+    * Recibe uno o mas observable y el resultado será el producto de ambos observables simultaneamente.
+    * No se dispara el complete de la subscripción hasta que todos los observables se completen
+    * El resultado es la combinación de todos los observables
+
+  Función combineLastest
+    * PErmite mandar observables como argumentos, combinarlos y emitir los valores de todos los observables simultaneamente.
+    * Es importante recalcar que combineLastest regresa un nuevo obsaervable hasta que todos los observables internos emita un valor.
+
+  Función forkJoin
+    * Recibe varios observable como argumento, el resultado será de un nuevo observable hasta que los observables como argumentos se completen
+    * Tienen que ser finitos los observables que se pasa como argumentos, si no el forkJoin no emitiria ningún valor.
+
